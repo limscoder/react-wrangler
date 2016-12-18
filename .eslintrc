@@ -1,0 +1,27 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "afterAll": true,
+    "afterEach": true,
+    "beforeAll": true,
+    "beforeEach": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "no-param-reassign": 0,
+    "max-len": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "react/jsx-indent-props": 0
+  }
+}
