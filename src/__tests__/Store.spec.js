@@ -5,10 +5,12 @@ describe('Store', () => {
   let store;
 
   beforeEach(() => {
-    store = new Store(
-      fromJS({
+    store = new Store({
+      initialState: fromJS({
         user: { name: 'black bart' },
-      }), jest.fn());
+      }),
+      onMissingPath: jest.fn(),
+    });
   });
 
   describe('#getPath', () => {

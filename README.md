@@ -1,7 +1,9 @@
 # react-wrangler
 
-`react-wrangler` simplifies state management by using a declarative component API to implement "one way data flow" and side effects.
-It's composable components all the way down: no actions, reducers, selectors, middleware, thunks, sagas, query fragments, or observeables required.
+`react-wrangler` simplifies state management by using a declarative component API
+to implement "one way data flow" and side effects.
+It's composable components all the way down:
+no actions, reducers, selectors, generators, middleware, thunks, sagas, query fragments, or observeables required.
 
 ## Why?
 
@@ -9,7 +11,7 @@ I am frustrated by the complexity of other state management libraries and inspir
 
 One of the first things I learned when beginning react is that `props` serve as the public API for components.
 It's a great concept because eliminating imperative function calls from the API makes components declarative and easily composable.
-An entire react application is composed by declaring a deep render tree of react-elements and using event handlers to trigger behavior and state changes in response to user actions.
+An entire react application is composed by defining a tree of react-elements and using event handlers to trigger state changes in response to user actions.
 The `render->user action->update state->render` cycle is commonly referred to as "one way data flow".
 
 This should be a very elegant solution to application development, but many state management frameworks force react developers to
@@ -160,11 +162,11 @@ function WrangledWelcome(props) {
 ### Side effects
 
 `react-wrangler` simplifies application logic by isolating all side effects into two callbacks.
- `Wrangler.onMissingPaths` and `Wrangler.onStoreChange` are the only 2 functions that should invoke side effects within a `react-wrangler` application.
+`Wrangle.onMissingPaths` and `Wrangle.onStoreChange` are the only 2 functions that should invoke side effects within a `react-wrangler` application.
 
 #### Fetching data
 
-Use `Wrangler.onMissingPaths` to fetch data.
+Use `Wrangle.onMissingPaths` to fetch data.
 It's up to the implementer to determine how the missing path values are fetched:
  [Falcor](https://netflix.github.io/falcor/),
  [Graphql](http://graphql.org/),
@@ -182,8 +184,6 @@ so implementers must be careful to avoid duplicate network requests.
 
 ```javascript
 function onMissingPaths(store, missingPaths) {
-  // WARNING: the same missing paths may be requested multiple times,
-  // implementers must be careful to avoid duplicate network requests.
   fetchPathsFromServer(missingPaths).then((pathValues) => {
     // call setPaths to update state and
     // re-render the view after pathValues are fetched.
@@ -200,7 +200,7 @@ ReactDOM.render(
 
 #### Persisting data
 
-Use `Wrangler.onStoreChange` to persist data.
+Use `Wrangle.onStoreChange` to persist data.
 `onStoreChange` is called whenever `path` values are changed.
 It's up to the implementer to determine how the path values are persisted,
 such as `LocalStorage` or an API call that makes a network request.
@@ -222,6 +222,28 @@ ReactDOM.render(
   </Wrangle>
 );
 ```
+
+### Debugging
+
+Set the `debug` prop to enable debugging messages in the console.
+
+```javascript 
+<Wrangle debug={true} />
+```
+
+Debugging messages include information about each state update.
+
+```
+> store changed (5): counter.current
+ > elapsed time: 0.08500000000094587ms
+ > changed paths: {counter.current: 92}
+ > new state: {counter: {current: 92}}
+ > type 'resetState(5)' in console to return to this state
+```
+
+Use the `resetState` function in the console to retreive any previous state for "time travel" debugging.
+Use the `setPath` function in the console to manually update state
+(object and array values are automatically converted to Immutable data structures).
 
 ### Optimization
 

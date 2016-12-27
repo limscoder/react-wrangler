@@ -34,7 +34,9 @@ function onStoreChange(store, changedPaths) {
 function App() {
   // the root level component needs to be wrapped in <Wrangle />
   return (
-    <Wrangle onMissingPaths={onMissingPaths} onStoreChange={onStoreChange}>
+    <Wrangle debug={true}
+             onMissingPaths={onMissingPaths}
+             onStoreChange={onStoreChange}>
       <WrangledCounter />
     </Wrangle>
   );

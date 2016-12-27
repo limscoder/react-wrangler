@@ -15,6 +15,7 @@ function onNextFrame(func) {
 export default class Wrangle extends React.Component {
   static propTypes = {
     children: PropTypes.element,
+    debug: PropTypes.bool,
     initialState: ImmutablePropTypes.map,
     onMissingPaths: PropTypes.func,
     onStoreChange: PropTypes.func,
@@ -22,6 +23,7 @@ export default class Wrangle extends React.Component {
 
   static defaultProps = {
     children: <span />,
+    debug: false,
     initialState: Map(),
   };
 
@@ -33,7 +35,12 @@ export default class Wrangle extends React.Component {
     super(props, context);
 
     this.missingPaths = Set();
-    this.store = new Store(props.initialState, this.onMissingPath);
+    const storeConfig = {
+      debug: props.debug,
+      initialState: props.initialState,
+      onMissingPath: this.onMissingPath,
+    };
+    this.store = new Store(storeConfig);
   }
 
   getChildContext() {
@@ -66,7 +73,7 @@ export default class Wrangle extends React.Component {
   }
 
   onStoreChange = (store, changedPaths) => {
-    if (this.props.onStoreChange) {
+    if (this.props.onStoreChange && Object.keys(changedPaths).length) {
       this.props.onStoreChange(store, changedPaths);
     }
   }

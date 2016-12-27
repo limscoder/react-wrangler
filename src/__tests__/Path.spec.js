@@ -12,7 +12,9 @@ describe('Path', () => {
   let mountOptions;
 
   beforeEach(() => {
-    const store = new Store(fromJS({ foo: 'bar', bar: 'baz' }));
+    const store = new Store({
+      initialState: fromJS({ foo: 'bar', bar: 'baz' }),
+    });
     mountOptions = {
       context: { wrangleStore: store },
     };

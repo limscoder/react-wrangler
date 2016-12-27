@@ -1,13 +1,18 @@
 import { Map, List } from 'immutable';
+import instrumentStore from './instrumentStore';
 
 const emptyMap = Map();
 const emptyList = List();
 
 export default class Store {
-  constructor(initialState = emptyMap, onMissingPath = () => {}) {
+  constructor({ debug = false, initialState = emptyMap, onMissingPath = () => {} }) {
     this.state = initialState;
     this.changeListeners = emptyList;
     this.onMissingPath = onMissingPath;
+
+    if (debug) {
+      instrumentStore(this);
+    }
   }
 
   getPath(path, defaultValue) {
