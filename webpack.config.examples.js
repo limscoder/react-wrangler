@@ -3,7 +3,7 @@ module.exports = {
 
   entry: {
     index: './examples/counter/App.js',
-    html: './examples/counter/index.html',
+    // html: './examples/counter/index.html',
   },
 
   output: {

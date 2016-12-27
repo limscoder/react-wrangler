@@ -2,6 +2,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import ReactDOM from 'react-dom';
 
+import indexHtml from './index.html';
 import Wrangle from '../../src/Wrangle';
 import WrangledCounter from './WrangledCounter';
 

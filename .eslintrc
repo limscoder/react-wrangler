@@ -17,6 +17,7 @@
   "parser": "babel-eslint",
   "rules": {
     "no-param-reassign": 0,
+    "no-unused-vars": ["error", { "varsIgnorePattern": "Html" }],
     "max-len": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-boolean-value": 0,

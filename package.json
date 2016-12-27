@@ -4,9 +4,9 @@
   "description": "A React component for simple and declarative state management.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config=./webpack.config.dist.js && cp dist/build/index* .",
+    "build": "webpack --config=./webpack.config.dist.js && webpack --config=./webpack.config.examples.js",
     "example": "webpack-dev-server --hot --inline --config=./webpack.config.examples.js",
-    "prepublish": "npm test && rm -rf ./dist && npm run example && npm run build",
+    "prepublish": "npm test && rm -rf ./dist && npm run build && cp dist/build/index* .",
     "lint": "eslint src/** examples/**",
     "test": "npm run lint && jest"
   },

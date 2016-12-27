@@ -1,7 +1,8 @@
 # react-wrangler
 
-`react-wrangler` simplifies state management by using a declarative component API
+`react-wrangler` simplifies state management by using a declarative component
 to implement "one way data flow" and side effects.
+
 It's composable components all the way down:
 no actions, reducers, selectors, generators, middleware, thunks, sagas, query fragments, or observeables required.
 
@@ -21,9 +22,14 @@ anywhere in the application, making it difficult to reason about when and why si
 Does "one way data flow" need to be this complicated?
 `react-wrangler` is an attempt to get back to basics and provide "one way data flow" with a simple, component based API.
 
-## Run the demo app locally
+## Example
 
-[example demo app code](./examples/counter/App.js)
+Take a look at the [example counter application](https://limscoder.github.io/react-wrangler/pages/examples/counter/index.html) and the
+[example application code](./examples/counter/App.js) for an idea of how `react-wrangler` works.
+
+### Running examples locally
+
+Developing against a local version of the example application is a good way to start learning `react-wrangler`.
 
 ```bash
 > git clone https://github.com/limscoder/react-wrangler
