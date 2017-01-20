@@ -152,10 +152,6 @@ function WrangledWelcome(props) {
   //
   // key === prop to map callback to
   // value === callback function
-  //
-  // WARNING: using inline-closures for callbacks
-  // will cause unnessecary vdom re-renders.
-  // Use statically defined functions whenever possible.
   const mapCallbacksToProps = { onDismiss };
   const mapPathsToProps = { ... };
 
@@ -182,11 +178,6 @@ It's up to the implementer to determine how the missing path values are fetched:
  etc.
 
 `onMissingPaths` is called once-per-frame with an array of de-duplicated paths that have been requested, but are not present in state.
-If network requests are required to fetch path values, it's recommended to batch
-them together into the fewest number of requests required.
-
-It's also important to note that `onMissingPaths` can be called multiple times with the same paths,
-so implementers must be careful to avoid duplicate network requests.
 
 ```javascript
 function onMissingPaths(store, missingPaths) {
@@ -253,6 +244,8 @@ Use the `setPath` function in the console to manually update state
 
 ### Optimization
 
+#### Use immutable data structures
+
 `path` values should *always* be immutable so `Path.shouldComponentUpdate` can avoid unnessecary vdom re-renders.
 
 ```javascript
@@ -262,6 +255,8 @@ setPath('user.preferences', { showFirstTimeHelp: true });
 // use Immutable data structures instead
 setPath('user.preferences', Immutable.fromJS({ showFirstTimeHelp: true }));
 ```
+
+#### Batch calls to `setPath`
 
 Invoking `setPath` triggers all `<Path />` components to check their state and possibly re-render, so it should be called as infrequently as possible.
 If multiple paths need to be set at the same time, it's more efficient to invoke `setPaths` once instead of calling `setPath` multiple times:
@@ -273,3 +268,17 @@ setPaths({
   'user.displayName': 'Kathy'
 });
 ```
+
+#### Avoid inline closures for callbacks
+
+Dynamically defined functions in `mapCallbacksToProps` will cause unnessecary vdom re-renders.
+Use statically defined functions whenever possible.
+
+#### Batch requests in `onMissingPaths`
+
+It's recommended to batch network requests triggered from within `onMissingPaths`
+into the fewest number of requests possible.
+
+It's also important to note that `onMissingPaths` can be called multiple times with the same paths.
+Everytime the component re-renders, `onMissingPaths` will be called with all missing paths.
+Implementers must be careful to avoid duplicate network requests by keeping track of in-flight requests.
