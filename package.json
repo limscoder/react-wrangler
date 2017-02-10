@@ -1,6 +1,6 @@
 {
   "name": "react-wrangler",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A React component for simple and declarative state management.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "keywords": [
     "react",
-    "falcor",
+    "redux",
     "rest",
     "state"
   ],

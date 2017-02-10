@@ -8,8 +8,6 @@ no actions, reducers, selectors, generators, middleware, thunks, sagas, query fr
 
 ## Why?
 
-I am frustrated by the complexity of other state management libraries and inspired by [Ryan Florence's](https://github.com/ryanflorence) talk at [React Rally 2016](https://youtu.be/kp-NOggyz54).
-
 One of the first things I learned when beginning react is that `props` serve as the public API for components.
 It's a great concept because eliminating imperative function calls from the API makes components declarative and easily composable.
 An entire react application is composed by defining a tree of react-elements and using event handlers to trigger state changes in response to user actions.
@@ -26,18 +24,6 @@ Does "one way data flow" need to be this complicated?
 
 Take a look at the [example counter application](https://limscoder.github.io/react-wrangler/pages/examples/counter/index.html) and the
 [example application code](./examples/counter/App.js) for an idea of how `react-wrangler` works.
-
-### Running examples locally
-
-Developing against a local version of the example application is a good way to start learning `react-wrangler`.
-
-```bash
-> git clone https://github.com/limscoder/react-wrangler
-> cd react-wrangler
-> npm i
-> npm run example
-> open http://localhost:9000
-```
 
 ## Development
 
